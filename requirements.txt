@@ -1,0 +1,12 @@
+pyvisa
+pyvisa-sim
+paho-mqtt
+fastapi
+uvicorn
+pyyaml
+numpy
+pandas
+scikit-learn
+openai
+langchain
+tiktoken

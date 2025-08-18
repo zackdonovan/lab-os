@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lab-OS Debug</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { background:#0f1220; color:#e7e7e7; font-family: ui-sans-serif, system-ui, -apple-system; margin:0; padding:24px; }
+        .card { background:#1a1f3a; border-radius:16px; padding:16px; margin: 16px 0; }
+        canvas { width:100%; height:320px; }
+        #debug { background:#2a1f3a; padding: 16px; border-radius: 8px; font-family: monospace; font-size: 12px; }
+    </style>
+</head>
+<body>
+    <h1>Lab-OS Debug</h1>
+    
+    <div class="card">
+        <h3>Debug Info</h3>
+        <div id="debug">Loading...</div>
+    </div>
+    
+    <div class="card">
+        <h3>Voltage Chart</h3>
+        <canvas id="voltage"></canvas>
+    </div>
+    
+    <div class="card">
+        <h3>Current Chart</h3>
+        <canvas id="current"></canvas>
+    </div>
+
+    <script>
+        const debug = document.getElementById('debug');
+        
+        function log(message) {
+            console.log(message);
+            debug.innerHTML += message + '<br>';
+        }
+        
+        log('Starting debug...');
+        
+        // Check Chart.js
+        if (typeof Chart === 'undefined') {
+            log('❌ Chart.js not loaded!');
+        } else {
+            log('✅ Chart.js loaded successfully');
+        }
+        
+        // Check canvas elements
+        const voltageCanvas = document.getElementById('voltage');
+        const currentCanvas = document.getElementById('current');
+        
+        if (!voltageCanvas) {
+            log('❌ Voltage canvas not found');
+        } else {
+            log('✅ Voltage canvas found');
+        }
+        
+        if (!currentCanvas) {
+            log('❌ Current canvas not found');
+        } else {
+            log('✅ Current canvas found');
+        }
+        
+        // Create charts
+        let vChart, cChart;
+        
+        try {
+            vChart = new Chart(voltageCanvas.getContext('2d'), {
+                type: 'line',
+                data: { 
+                    labels: [], 
+                    datasets: [{ 
+                        label: 'Voltage', 
+                        data: [], 
+                        fill: false, 
+                        tension: 0.2,
+                        borderColor: '#9fd1ff'
+                    }] 
+                },
+                options: {
+                    animation: false,
+                    responsive: true,
+                    scales: { 
+                        x: { ticks: { autoSkip: true, maxTicksLimit: 8 }}, 
+                        y: { title: { display: true, text: 'V' } } 
+                    },
+                    plugins: { legend: { display: true } }
+                }
+            });
+            log('✅ Voltage chart created');
+        } catch(e) {
+            log('❌ Error creating voltage chart: ' + e.message);
+        }
+        
+        try {
+            cChart = new Chart(currentCanvas.getContext('2d'), {
+                type: 'line',
+                data: { 
+                    labels: [], 
+                    datasets: [{ 
+                        label: 'Current', 
+                        data: [], 
+                        fill: false, 
+                        tension: 0.2,
+                        borderColor: '#ff6b6b'
+                    }] 
+                },
+                options: {
+                    animation: false,
+                    responsive: true,
+                    scales: { 
+                        x: { ticks: { autoSkip: true, maxTicksLimit: 8 }}, 
+                        y: { title: { display: true, text: 'A' } } 
+                    },
+                    plugins: { legend: { display: true } }
+                }
+            });
+            log('✅ Current chart created');
+        } catch(e) {
+            log('❌ Error creating current chart: ' + e.message);
+        }
+        
+        // Test API
+        async function testAPI() {
+            log('Testing API...');
+            
+            try {
+                const response = await fetch('/history?n=5');
+                log('API response status: ' + response.status);
+                
+                if (!response.ok) {
+                    throw new Error('HTTP ' + response.status);
+                }
+                
+                const data = await response.json();
+                log('API data received: ' + data.length + ' points');
+                log('Sample data: ' + JSON.stringify(data[0]).substring(0, 100) + '...');
+                
+                // Add data to charts
+                data.forEach(point => {
+                    const label = new Date(point.ts * 1000).toLocaleTimeString();
+                    
+                    if (vChart) {
+                        vChart.data.labels.push(label);
+                        vChart.data.datasets[0].data.push(point.voltage);
+                    }
+                    
+                    if (cChart) {
+                        cChart.data.labels.push(label);
+                        cChart.data.datasets[0].data.push(point.current);
+                    }
+                });
+                
+                if (vChart) vChart.update();
+                if (cChart) cChart.update();
+                
+                log('✅ Charts updated with data');
+                
+            } catch(e) {
+                log('❌ API error: ' + e.message);
+            }
+        }
+        
+        // Run test
+        setTimeout(testAPI, 1000);
+    </script>
+</body>
+</html>

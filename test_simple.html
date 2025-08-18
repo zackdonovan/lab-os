@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Test</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
+</head>
+<body>
+    <h1>Simple Chart Test</h1>
+    <canvas id="testChart" width="400" height="200"></canvas>
+    
+    <script>
+        console.log('Starting simple test...');
+        
+        // Test Chart.js
+        if (typeof Chart === 'undefined') {
+            console.error('Chart.js not loaded!');
+            document.body.innerHTML += '<p style="color: red;">Chart.js failed to load</p>';
+        } else {
+            console.log('✅ Chart.js loaded successfully');
+            
+            // Create a simple chart
+            const ctx = document.getElementById('testChart').getContext('2d');
+            const chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['1', '2', '3', '4', '5'],
+                    datasets: [{
+                        label: 'Test Data',
+                        data: [1, 2, 3, 2, 1],
+                        borderColor: 'blue'
+                    }]
+                }
+            });
+            console.log('✅ Chart created successfully');
+        }
+        
+        // Test API
+        async function testAPI() {
+            try {
+                console.log('Testing API...');
+                const response = await fetch('http://localhost:8002/latest?device=scope1');
+                console.log('API response status:', response.status);
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('✅ API working, data:', data);
+                    document.body.innerHTML += '<p style="color: green;">✅ API working!</p>';
+                } else {
+                    console.error('API error:', response.status);
+                    document.body.innerHTML += '<p style="color: red;">❌ API error: ' + response.status + '</p>';
+                }
+            } catch (e) {
+                console.error('API test failed:', e);
+                document.body.innerHTML += '<p style="color: red;">❌ API test failed: ' + e.message + '</p>';
+            }
+        }
+        
+        testAPI();
+    </script>
+</body>
+</html>

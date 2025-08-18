@@ -1,0 +1,5 @@
+name: scope1
+driver: drivers.demo.random_meter
+poll_hz: 1.0
+mqtt_host: localhost
+mqtt_port: 1883
