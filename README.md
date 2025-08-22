@@ -21,7 +21,7 @@ Lab-OS is a comprehensive platform designed to streamline laboratory operations 
 - **Configuration Management**: YAML-based device configuration
 - **Experiment Optimization**: AI-suggested parameter optimization
 
-## 🏗 Architecture
+##  Architecture
 
 ```
 Lab-OS/
