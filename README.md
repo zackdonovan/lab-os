@@ -39,7 +39,7 @@ Lab-OS/
 └── data/               # Time-series data storage
 ```
 
-## 🛠 Installation
+## Installation
 
 ### Prerequisites
 - Python 3.8+
@@ -130,7 +130,7 @@ device:
 - **Device Status**: Individual instrument health monitoring
 - **Predictive Alerts**: Early warning system
 
-## 📈 Data Flow
+##  Data Flow
 
 ```
 Instruments → Sidecars → MQTT → Analyzer → Database
@@ -140,7 +140,7 @@ Instruments → Sidecars → MQTT → Analyzer → Database
   Discovery   Config   Real-time  Insights  History
 ```
 
-## 🔌 API Endpoints
+##  API Endpoints
 
 ### Data Endpoints
 - `GET /latest` - Latest device readings
@@ -170,7 +170,7 @@ Instruments → Sidecars → MQTT → Analyzer → Database
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📝 License
+##  License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
