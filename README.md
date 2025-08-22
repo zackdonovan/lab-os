@@ -2,7 +2,7 @@
 
 Lab-OS is a comprehensive platform designed to streamline laboratory operations by providing real-time data monitoring, AI-powered insights, and automated experiment management for physics and engineering laboratories.
 
-## 🚀 Features
+##  Features
 
 ### Core Functionality
 - **Real-time Data Streaming**: MQTT-based telemetry from lab instruments
@@ -21,7 +21,7 @@ Lab-OS is a comprehensive platform designed to streamline laboratory operations 
 - **Configuration Management**: YAML-based device configuration
 - **Experiment Optimization**: AI-suggested parameter optimization
 
-## 🏗️ Architecture
+## 🏗 Architecture
 
 ```
 Lab-OS/
@@ -39,7 +39,7 @@ Lab-OS/
 └── data/               # Time-series data storage
 ```
 
-## 🛠️ Installation
+## 🛠 Installation
 
 ### Prerequisites
 - Python 3.8+
@@ -59,7 +59,7 @@ pip install -r requirements.txt
 export OPENAI_API_KEY="your_openai_api_key_here"
 ```
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### 1. Start the Data Pipeline
 ```bash
@@ -78,7 +78,7 @@ uvicorn hub.api:app --reload --port 8002
 - **AI Assistant**: http://localhost:8002/ai
 - **API Documentation**: http://localhost:8002/docs
 
-## 📊 Dashboard Features
+##  Dashboard Features
 
 ### Main Dashboard (`/`)
 - Real-time voltage and current charts
@@ -113,7 +113,7 @@ device:
 - `MQTT_BROKER`: MQTT broker address (default: localhost)
 - `MQTT_PORT`: MQTT broker port (default: 1883)
 
-## 🤖 AI Features
+##  AI Features
 
 ### Anomaly Detection
 - **Drift Detection**: Exponential moving average analysis
@@ -151,7 +151,7 @@ Instruments → Sidecars → MQTT → Analyzer → Database
 - `POST /chat` - AI assistant chat
 - `GET /discover/visa` - VISA device discovery
 
-## 🧪 Supported Instruments
+##  Supported Instruments
 
 ### Currently Supported
 - **Demo/Random Meter**: Simulation driver for testing
@@ -162,7 +162,7 @@ Instruments → Sidecars → MQTT → Analyzer → Database
 - **Tektronix**: Oscilloscopes and analyzers
 - **Custom Drivers**: User-defined instrument support
 
-## 🤝 Contributing
+##  Contributing
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
@@ -174,14 +174,14 @@ Instruments → Sidecars → MQTT → Analyzer → Database
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+##  Acknowledgments
 
 - **OpenAI**: For GPT integration and AI capabilities
 - **FastAPI**: For the web framework
 - **MQTT**: For real-time messaging
 - **VISA**: For instrument communication standards
 
-## 📞 Support
+##  Support
 
 For questions, issues, or contributions:
 - **Issues**: [GitHub Issues](https://github.com/zackdonovan/lab-os/issues)
@@ -189,4 +189,4 @@ For questions, issues, or contributions:
 
 ---
 
-**Lab-OS**: Making laboratory automation accessible and intelligent. 🧪🤖
+**Lab-OS**: Making laboratory automation accessible and intelligent. 
